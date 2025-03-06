@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump's Latest Discussion-Stirring Quote</title>
+    <script>
+        async function fetchTrumpQuote() {
+            const apiKey = "a03b9442e36343cab910cded787ad06e"; // NewsAPI key
+            const url = `https://newsapi.org/v2/everything?q=Trump+statement+debate+discussion&language=en&sortBy=relevancy&apiKey=${apiKey}`;
+
+            try {
+                let response = await fetch(url);
+                let data = await response.json();
+
+                if (data.articles && data.articles.length > 0) {
+                    let randomIndex = Math.floor(Math.random() * data.articles.length);
+                    let article = data.articles[randomIndex];
+                    let title = article.title;
+                    let source = article.source.name;
+                    let quoteText = `"${title}" - ${source}`;
+
+                    document.getElementById('quote').innerText = quoteText;
+                } else {
+                    document.getElementById('quote').innerText = "Trump: 'We will bring jobs back to America!'";
+                }
+            } catch (error) {
+                document.getElementById('quote').innerText = "Trump: 'We will bring jobs back to America!'";
+            }
+        }
+
+        function rotateQuotes() {
+            fetchTrumpQuote();
+            setTimeout(rotateQuotes, 300000); // Refresh quote every 5 minutes (300,000ms)
+        }
+
+        window.onload = rotateQuotes;
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg'); /* High-res Trump image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .quote-box {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 20px;
+            padding: 20px;
+            border: 2px solid #fff;
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.7);
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-box" id="quote">Fetching latest quote...</div>
+</body>
+</html>
