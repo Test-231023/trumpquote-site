@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump's Latest Crazy Quote</title>
+    <script>
+        async function fetchLatestQuote() {
+            try {
+                let response = await fetch('https://api.trumpquotesapi.com/latest'); // Example API
+                let data = await response.json();
+                document.getElementById('quote').innerText = data.quote;
+            } catch (error) {
+                document.getElementById('quote').innerText = "Could not fetch latest quote.";
+            }
+        }
+        window.onload = fetchLatestQuote;
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .quote-box {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px;
+            padding: 20px;
+            border: 2px solid #000;
+            display: inline-block;
+            background-color: #f4f4f4;
+        }
+        .affiliate-links {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Trump's Latest Crazy Quote</h1>
+    <div class="quote-box" id="quote">Fetching latest quote...</div>
+    
+    <div class="affiliate-links">
+        <h2>Shop Related Items:</h2>
+        <a href="https://www.amazon.com/dp/example-affiliate-link" target="_blank">Trump Memorabilia</a>
+        <br>
+        <a href="https://www.amazon.com/dp/example-affiliate-link2" target="_blank">Political Books</a>
+        <br>
+        <a href="https://www.amazon.com/dp/example-affiliate-link3" target="_blank">Funny Merchandise</a>
+    </div>
+</body>
+</html>
